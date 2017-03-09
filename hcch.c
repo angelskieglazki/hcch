@@ -2,8 +2,30 @@
 #include <fcntl.h>
 #include <string.h>
 #include <stdlib.h>
-int main(int argc, char* argv[]) {
+#include <pwd.h>
+#include <time.h>
 
+#define SOURCE "/**\n* \\file %s\n* \\author %s\n*\n*\n* Created on %s*/\n\n#ifndef %s_H\n#define %s_H\n\n#endif"
+
+const char *get_user_name()
+{
+    uid_t uid = geteuid();
+    struct passwd *pw = getpwuid(uid);
+    if (pw) {
+        return pw->pw_name;
+    }
+    return "";
+}
+
+char *get_time()
+{
+    time_t t = time(NULL);
+    struct tm *tm = localtime(&t);
+    return asctime(tm);
+}
+
+int main(int argc, char* argv[]) 
+{
     char *name;
     if (argc == 2) {
         name = malloc(strlen(argv[1]));
@@ -18,7 +40,7 @@ int main(int argc, char* argv[]) {
             name[i] = toupper(name[i]);
         char source[200];
         int cx;
-        cx = snprintf(source, 200, "#ifndef %s_H\n#define %s_H\n\n#endif", name, name);
+        cx = snprintf(source, 200, SOURCE, name, get_user_name(), get_time(), name, name);
         
         int fd;
         
