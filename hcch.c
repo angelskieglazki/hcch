@@ -5,7 +5,7 @@
 #include <pwd.h>
 #include <time.h>
 
-#define SOURCE "/**\n* \\file %s\n* \\author %s\n*\n*\n* Created on %s*/\n\n#ifndef %s_H\n#define %s_H\n\n#endif"
+#define SOURCE "/**\n* \\file %s\n* \\author %s\n*\n*\n* Created on %s*/\n\n#ifndef %s_H\n#define %s_H\n\n#ifdef __cplusplus\nextern \"C\" {\n#endif\n\n\n\n\n#ifdef __cplusplus\n}\n#endif\n\n#endif"
 
 const char *get_user_name()
 {
@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
             name[i] = toupper(name[i]);
         char source[200];
         int cx;
-        cx = snprintf(source, 200, SOURCE, name, get_user_name(), get_time(), name, name);
+        cx = snprintf(source, 200, SOURCE, name_h, get_user_name(), get_time(), name, name);
         
         int fd;
         
