@@ -30,17 +30,17 @@ int main(int argc, char *argv[])
 	if (argc == 2) {
 		name = malloc(strlen(argv[1]));
 		strncpy(name, argv[1], strlen(argv[1]));
-		char name_h[50];
-		char name_c[50];
+		char name_h[100];
+		char name_c[100];
 		snprintf(name_h, 100, "%s.h", name);
 		snprintf(name_c, 100, "%s.c", name);
 
 		int i;
 		for (i = 0; i < strlen(name); i++)
 			name[i] = toupper(name[i]);
-		char source[200];
+		char source[300];
 		int cx;
-		cx = snprintf(source, 200, SOURCE, name_h, get_user_name(),
+		cx = snprintf(source, 300, SOURCE, name_h, get_user_name(),
 			      get_time(), name, name);
 
 		int fd;
