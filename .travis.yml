@@ -28,8 +28,8 @@ matrix:
             - g++-6
             - boost1.67
 
-before_script:
-  - sudo apt-get install libboost-dev -y
+#before_script:
+ # - apt-get install libboost-dev -y
 script:
   - cmake .
   - cmake --build .

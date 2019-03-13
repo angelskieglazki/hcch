@@ -8,8 +8,7 @@ endif()
 
 project(hcch VERSION 0.0.${VERSION_BUILD})
 
-#find_package(Boost 1.65 COMPONENTS program_options REQUIRED)
-FIND_PACKAGE( Boost )
+find_package(Boost COMPONENTS program_options REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
 
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
