@@ -18,7 +18,7 @@ configure_file (
         "${PROJECT_BINARY_DIR}/version.h"
 )
 
-#set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 17)
 
 add_executable(hcch hcch.cpp SourcesCreator.cpp SourcesCreator.h)
 
