@@ -1,6 +1,6 @@
 language: cpp
 before_script:
-  - sudo apt-get install libboost-dev -y
+  - sudo apt-get install libboost-program-options1.65-dev -y
 script:
   - cmake .
   - cmake --build .
