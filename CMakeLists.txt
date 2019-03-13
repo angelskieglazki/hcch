@@ -8,6 +8,8 @@ endif()
 
 project(hcch VERSION 0.0.${VERSION_BUILD})
 
+set(BOOST_LIBRARYDIR ${BOOST_ROOT}/stage/lib/)
+
 find_package(Boost COMPONENTS program_options REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
 
