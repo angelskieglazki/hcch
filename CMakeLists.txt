@@ -8,10 +8,11 @@ endif()
 
 project(hcch VERSION 0.0.${VERSION_BUILD})
 
-find_package(Boost COMPONENTS program_options REQUIRED)
+#find_package(Boost 1.65 COMPONENTS program_options REQUIRED)
+FIND_PACKAGE( Boost )
 find_package(LLVM REQUIRED CONFIG)
 
-include_directories( ${Boost_INCLUDE_DIRS} )
+INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 configure_file (
         "${PROJECT_SOURCE_DIR}/version.h.in"
@@ -28,7 +29,4 @@ set_target_properties(hcch PROPERTIES
         COMPILE_OPTIONS -Wpedantic -Wall -Wextra
         )
 
-
-set( LIBS_TO_LINK ${Boost_LIBRARIES} )
-
-target_link_libraries(hcch ${LIBS_TO_LINK})
+TARGET_LINK_LIBRARIES( hcch LINK_PUBLIC ${Boost_LIBRARIES} )
