@@ -8,8 +8,7 @@ endif()
 
 project(hcch VERSION 0.0.${VERSION_BUILD})
 
-FIND_PACKAGE( Boost )
-INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
+find_package(Boost COMPONENTS program_options REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
 
 include_directories( ${Boost_INCLUDE_DIRS} )
@@ -33,14 +32,3 @@ set_target_properties(hcch PROPERTIES
 set( LIBS_TO_LINK ${Boost_LIBRARIES} )
 
 target_link_libraries(hcch ${LIBS_TO_LINK})
-
-install(TARGETS hcch RUNTIME DESTINATION bin)
-
-set(CPACK_GENERATOR DEB)
-set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
-set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
-set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
-
-set(CPACK_PACKAGE_CONTACT mpano91@gmail.com)
-
-include (CPack)

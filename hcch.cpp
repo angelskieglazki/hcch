@@ -2,11 +2,13 @@
   * Created by max on 12.03.19.
   */
 
+#include <iostream>
+using namespace std;
+
 #include <boost/program_options.hpp>
 using namespace boost::program_options;
 
-#include <iostream>
-using namespace std;
+
 
 /* Auxiliary functions for checking input for validity. */
 
