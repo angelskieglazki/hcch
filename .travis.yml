@@ -5,7 +5,7 @@ os: linux
 
 matrix:
   include:
-    - env: COMPILER=g++-8 BUILD=Debug STANDARD=14
+    - env: COMPILER=g++-8 BUILD=Debug STANDARD=17
       compiler: gcc
       addons:
         apt:

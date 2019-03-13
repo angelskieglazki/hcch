@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.9)
 
 if($ENV{TRAVIS_BUILD_NUMBER})
     set(VERSION_BUILD $ENV{TRAVIS_BUILD_NUMBER})
@@ -18,12 +18,12 @@ configure_file (
         "${PROJECT_BINARY_DIR}/version.h"
 )
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
 add_executable(hcch hcch.cpp SourcesCreator.cpp SourcesCreator.h)
 
 set_target_properties(hcch PROPERTIES
-        CXX_STANDARD 17
+        CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
         COMPILE_OPTIONS -Wpedantic -Wall -Wextra
         )
