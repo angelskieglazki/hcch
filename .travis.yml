@@ -28,7 +28,9 @@ matrix:
             - g++-8
             - boost1.67
 
-#before_script:
+before_script:
+  - wget https://cmake.org/files/v3.9/cmake-3.9.1-Linux-x86_64.sh
+  - sh cmake-3.9.1-Linux-x86_64.sh -- --skip-license --prefix=/usr
  # - apt-get install libboost-dev -y
 script:
   - cmake .
