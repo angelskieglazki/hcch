@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.10)
 
 if($ENV{TRAVIS_BUILD_NUMBER})
     set(VERSION_BUILD $ENV{TRAVIS_BUILD_NUMBER})
