@@ -1,7 +1,7 @@
 /**
   * Created by max on 12.03.19.
   */
-#define _GLIBCXX_USE_CXX11_ABI 0
+//#define _GLIBCXX_USE_CXX11_ABI 0
 
 #include <iostream>
 using namespace std;
