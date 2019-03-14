@@ -1,5 +1,5 @@
 language: cpp
-dist: bionic
+dist: xenial
 sudo: false
 os: linux
 
@@ -15,7 +15,7 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-8
-#            - boost1.67
+            - boost1.67
     - env: COMPILER=g++-8 BUILD=Release STANDARD=14
       compiler: gcc
       addons:
@@ -26,19 +26,16 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-8
-#            - boost1.67
+            - boost1.67
 
 before_script:
-#  - sudo apt-get install libboost-all-dev -y
-  - sudo wget -O boost_1_65_1.tar.gz https://sourceforge.net/projects/boost/files/boost/1.65.1/boost_1_65_1.tar.gz/download
-  - sudo tar xzvf boost_1_65_1.tar.gz > build.log 2>&1
-  - cd boost_1_65_1/
-  - sudo ./bootstrap.sh --with-libraries=program_options --prefix=/usr/local
-  - sudo ./b2 link=shared threading=multi variant=release
-  - sudo ./b2 install > build.log 2>&1
-  - while sleep 10s; do echo "=====[ $SECONDS seconds, buildroot still building... ]====="; done &
-  - kill %1
-#| sudo tee install.log
+#
+#  - sudo wget -O boost_1_65_1.tar.gz https://sourceforge.net/projects/boost/files/boost/1.65.1/boost_1_65_1.tar.gz/download
+#  - sudo tar xzvf boost_1_65_1.tar.gz > build.log 2>&1
+#  - cd boost_1_65_1/
+#  - sudo ./bootstrap.sh --with-libraries=program_options --prefix=/usr/local
+#  - sudo ./b2 link=shared threading=multi variant=release
+#  - sudo ./b2 install > build.log 2>&1
   - wget https://cmake.org/files/v3.13/cmake-3.13.4-Linux-x86_64.sh
   - sudo sh cmake-3.13.4-Linux-x86_64.sh -- --skip-license --prefix=/usr
 
