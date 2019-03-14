@@ -15,7 +15,7 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-8
-            - boost1.67
+            - boost1.65
     - env: COMPILER=g++-8 BUILD=Release STANDARD=14
       compiler: gcc
       addons:
@@ -26,12 +26,12 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-8
-            - boost1.67
+            - boost1.65
 
 before_script:
   - wget https://cmake.org/files/v3.9/cmake-3.9.1-Linux-x86_64.sh
   - sudo sh cmake-3.9.1-Linux-x86_64.sh -- --skip-license --prefix=/usr
- 
+
 script:
   - cmake .
   - cmake --build .
