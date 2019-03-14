@@ -30,15 +30,12 @@ matrix:
 
 before_script:
 #  - sudo apt-get install libboost-all-dev -y
-#  - sudo wget -O boost_1_65_1.tar.gz https://sourceforge.net/projects/boost/files/boost/1.65.1/boost_1_65_1.tar.gz/download
-#  - sudo tar xzvf boost_1_65_1.tar.gz
-#  - cd boost_1_65_1/
-#  - sudo ./bootstrap.sh --with-libraries=program_options --prefix=/usr/local
-#  - sudo ./b2 link=shared threading=multi variant=release
-#  - sudo ./b2 install
-  - sudo add-apt-repository ppa:ostogvin/tjo-develop -y
-  - sudo apt-get update -q
-  - sudo apt-get install libboost1.65-all-dev -y
+  - sudo wget -O boost_1_65_1.tar.gz https://sourceforge.net/projects/boost/files/boost/1.65.1/boost_1_65_1.tar.gz/download
+  - sudo tar xzvf boost_1_65_1.tar.gz > build.log 2>&1
+  - cd boost_1_65_1/
+  - sudo ./bootstrap.sh --with-libraries=program_options --prefix=/usr/local
+  - sudo ./b2 link=shared threading=multi variant=release
+  - sudo ./b2 install | sudo tee install.log
   - wget https://cmake.org/files/v3.13/cmake-3.13.4-Linux-x86_64.sh
   - sudo sh cmake-3.13.4-Linux-x86_64.sh -- --skip-license --prefix=/usr
 
