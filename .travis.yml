@@ -30,7 +30,7 @@ matrix:
 
 before_script:
   #- sudo apt-get install libboost-all-dev -y
-  - sudo wget -0 boost_1_65_1.tar.gz https://sourceforge.net/projects/boost/files/boost/1.65.1/boost_1_65_1.tar.gz/download
+  - sudo wget -O boost_1_65_1.tar.gz https://sourceforge.net/projects/boost/files/boost/1.65.1/boost_1_65_1.tar.gz/download
   - sudo tar xzvf boost_1_65_1.tar.gz
   - cd boost_1_65_1/
   - sudo ./bootstrap.sh --with-libraries=program_options --prefix=/usr/local
