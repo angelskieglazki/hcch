@@ -6,7 +6,7 @@ else()
     set(VERSION_BUILD 0)
 endif()
 
-project(hcch VERSION 0.0.${VERSION_BUILD})
+project(hcch VERSION 0.1.${VERSION_BUILD})
 
 
 set(BOOST_ROOT /usr/local/include/boost/)

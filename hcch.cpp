@@ -6,16 +6,13 @@
 #include <iostream>
 using namespace std;
 
+#include "SourcesCreator.h"
+
 //#include <boost/program_options.hpp>
 #include <boost/program_options.hpp>
 using namespace boost::program_options;
 
 
-
-/* Auxiliary functions for checking input for validity. */
-
-/* Function used to check that 'opt1' and 'opt2' are not specified
-   at the same time. */
 void conflicting_options(const variables_map& vm,
                          const char* opt1, const char* opt2)
 {
@@ -25,8 +22,7 @@ void conflicting_options(const variables_map& vm,
                           + opt1 + "' and '" + opt2 + "'.");
 }
 
-/* Function used to check that of 'for_what' is specified, then
-   'required_option' is specified too. */
+// \TODO: Need upgrade this function for array of required options
 void option_dependency(const variables_map& vm,
                        const char* for_what, const char* required_option)
 {
@@ -39,33 +35,14 @@ void option_dependency(const variables_map& vm,
 int main(int argc, char* argv[])
 {
   try {
-    string sourceName;
-    string macrofile, libmakfile;
-    bool t_given = false;
-    bool b_given = false;
-    string mainpackage;
-    string depends = "deps_file";
-    string sources = "src_file";
-    string root = ".";
 
     options_description desc("Allowed options");
     desc.add_options()
-        // First parameter describes option name/short name
-        // The second is parameter to option
-        // The third is description
         ("help,h", "print usage message")
-        ("name,n", value(&sourceName), "source name")
-        ("macrofile,m", value(&macrofile), "full pathname of macro.h")
-        ("two,t", bool_switch(&t_given), "preprocess both header and body")
-        ("body,b", bool_switch(&b_given), "preprocess body in the header context")
-        ("libmakfile,l", value(&libmakfile),
-         "write include makefile for library")
-        ("mainpackage,p", value(&mainpackage),
-         "output dependency information")
-        ("depends,d", value(&depends),
-         "write dependencies to <pathname>")
-        ("sources,s", value(&sources), "write source package list to <pathname>")
-        ("root,r", value(&root), "treat <dirname> as project root directory")
+        ("name,n", value<string>(), "source name")
+        ("c_sources", bool_switch(), "*.h/*.c pair for c")
+        ("cpp_sources", bool_switch(), "*.h/*.cpp pair for c++")
+        ("version,V", "output the version number")
         ;
 
     variables_map vm;
@@ -76,21 +53,23 @@ int main(int argc, char* argv[])
       return 0;
     }
 
-    conflicting_options(vm, "output", "two");
-    conflicting_options(vm, "output", "body");
-    conflicting_options(vm, "output", "mainpackage");
-    conflicting_options(vm, "two", "mainpackage");
-    conflicting_options(vm, "body", "mainpackage");
+    conflicting_options(vm, "c_sources", "cpp_sources");
+    option_dependency(vm, "c_sources", "name");
+    option_dependency(vm, "cpp_sources", "name");
 
-    conflicting_options(vm, "two", "body");
-    conflicting_options(vm, "libmakfile", "mainpackage");
-    conflicting_options(vm, "libmakfile", "mainpackage");
+    if (!vm["cpp_sources"].as<bool>() && !vm["c_sources"].as<bool>()) {
+      throw logic_error(string("Source type missed!"));
+    }
 
-    option_dependency(vm, "depends", "mainpackage");
-    option_dependency(vm, "sources", "mainpackage");
-    option_dependency(vm, "root", "mainpackage");
+    SourcesCreator::Builder b;
+    if (vm["cpp_sources"].as<bool>()) {
+      b.setName(vm["name"].as<string>()).setType(source_type::cpp).build();
+    } else if (vm["c_sources"].as<bool>()) {
+      b.setName(vm["name"].as<string>()).setType(source_type::c).build();
+    }
 
-    cout << "two = " << vm["two"].as<bool>() << "\n";
+    auto sc = b.build();
+    sc.create_source();
   }
   catch(exception& e) {
     cerr << e.what() << "\n";
