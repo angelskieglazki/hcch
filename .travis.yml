@@ -3,6 +3,11 @@ dist: xenial
 sudo: false
 os: linux
 
+branches:
+  only:
+    - master
+    - /^v.*$/
+
 matrix:
   include:
     - env: COMPILER=g++-8 BUILD=Debug STANDARD=14
@@ -47,7 +52,7 @@ script:
 deploy:
   provider: script
   skip_cleanup: true
-  on:
-    tags: true
   script:
     - curl -T hcch-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uangelskieglazki:$BINTRAY_API_KEY "https://api.bintray.com/content/angelskieglazki/aeco/hcch/$TRAVIS_BUILD_NUMBER/hcch-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  on:
+    tags: true
