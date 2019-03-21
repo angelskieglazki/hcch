@@ -10,7 +10,7 @@ project(hcch VERSION 0.1.${VERSION_BUILD})
 
 
 set(BOOST_ROOT /usr/include/boost/)
-set(BOOST_LIBRARYDIR /usr/lib)
+set(BOOST_LIBRARYDIR /usr/lib/x86_64-linux-gnu/)
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.67 COMPONENTS program_options REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
