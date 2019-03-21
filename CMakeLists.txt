@@ -10,7 +10,10 @@ project(hcch VERSION 0.1.${VERSION_BUILD})
 
 
 set(BOOST_ROOT /usr/include/boost/)
-set(BOOST_LIBRARYDIR /usr/lib/x86_64-linux-gnu/)
+message(${BOOST_ROOT})
+
+set(BOOST_LIBRARYDIR /usr/lib/x86_64-linux-gnu)
+message(${BOOST_LIBRARYDIR})
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.67 COMPONENTS program_options REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
@@ -33,8 +36,8 @@ set_target_properties(hcch PROPERTIES
         COMPILE_OPTIONS -Wpedantic -Wall -Wextra
         )
 
-TARGET_LINK_LIBRARIES( hcch  ${Boost_LIBRARIES} )
-#LINK_PUBLIC
+TARGET_LINK_LIBRARIES( hcch ${BOOST_LIBRARYDIR}/libboost_program_options.a )# ${Boost_LIBRARIES} )
+
 install(TARGETS hcch RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
