@@ -15,7 +15,7 @@ set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.67 COMPONENTS program_options REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
 
-INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
+#INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 
 configure_file (
@@ -33,8 +33,8 @@ set_target_properties(hcch PROPERTIES
         COMPILE_OPTIONS -Wpedantic -Wall -Wextra
         )
 
-TARGET_LINK_LIBRARIES( hcch LINK_PUBLIC ${Boost_LIBRARIES} )
-
+TARGET_LINK_LIBRARIES( hcch  ${Boost_LIBRARIES} )
+#LINK_PUBLIC
 install(TARGETS hcch RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
