@@ -15,6 +15,7 @@ find_package(Boost 1.67 COMPONENTS program_options REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
 
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
+set(BOOST_LIBRARYDIR /usr/local/lib)
 
 configure_file (
         "${PROJECT_SOURCE_DIR}/version.h.in"
