@@ -9,8 +9,8 @@ endif()
 project(hcch VERSION 0.1.${VERSION_BUILD})
 
 
-set(BOOST_ROOT /usr/include/boost/)
-message(${BOOST_ROOT})
+#set(BOOST_ROOT /usr/include/boost/)
+#message(${BOOST_ROOT})
 
 #set(BOOST_LIBRARYDIR /usr/local/lib)#/usr/lib/x86_64-linux-gnu)
 #message(${BOOST_LIBRARYDIR})
