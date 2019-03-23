@@ -12,12 +12,15 @@ project(hcch VERSION 0.1.${VERSION_BUILD})
 set(BOOST_ROOT /usr/include/boost/)
 message(${BOOST_ROOT})
 
-set(BOOST_LIBRARYDIR /usr/local/lib)#/usr/lib/x86_64-linux-gnu)
-message(${BOOST_LIBRARYDIR})
+#set(BOOST_LIBRARYDIR /usr/local/lib)#/usr/lib/x86_64-linux-gnu)
+#message(${BOOST_LIBRARYDIR})
 
 set(Boost_USE_STATIC_LIBS ON)
 include_directories (${Boost_INCLUDE_DIRS})
 link_directories (${Boost_LIBRARY_DIRS})
+
+set(BOOST_LIBRARYDIR ${BOOST_ROOT}/stage/lib/)
+
 find_package(Boost 1.67 COMPONENTS program_options REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
 
