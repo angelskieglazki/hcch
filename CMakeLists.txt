@@ -16,11 +16,12 @@ set(BOOST_LIBRARYDIR /usr/local/lib)#/usr/lib/x86_64-linux-gnu)
 message(${BOOST_LIBRARYDIR})
 
 set(Boost_USE_STATIC_LIBS ON)
+include_directories (${Boost_INCLUDE_DIRS})
+link_directories (${Boost_LIBRARY_DIRS})
 find_package(Boost 1.67 COMPONENTS program_options REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
 
 #INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
-
 
 configure_file (
         "${PROJECT_SOURCE_DIR}/version.h.in"
@@ -38,6 +39,7 @@ set_target_properties(hcch PROPERTIES
         )
 
 TARGET_LINK_LIBRARIES( hcch ${BOOST_LIBRARYDIR}/libboost_program_options.a )# ${Boost_LIBRARIES} )
+
 
 install(TARGETS hcch RUNTIME DESTINATION bin)
 
