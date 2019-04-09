@@ -6,7 +6,7 @@ os: linux
 env:
   global:
     - PROJECT_VERSION_MAJOR="0"
-    - PROJECT_VERSION_MINOR="2"
+    - PROJECT_VERSION_MINOR="3"
     - PROJECT_VERSION_PATCH="${TRAVIS_BUILD_NUMBER}"
     - PROJECT_VERSION="${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}"
 branches:
@@ -59,7 +59,7 @@ before_script:
   - if [ ! -d "$BOOST_ROOT" ]; then mkdir -p "$BOOST_ROOT" && tar xzf "$DOWNLOAD_ROOT/boost.tar.gz" --strip-components=1 -C "$BOOST_ROOT"; fi
   - if [ ! -f "$BOOST_ROOT/b2" ]; then cd "$BOOST_ROOT"; ./bootstrap.sh --with-libraries=program_options,system,thread,regex; fi
   - cd "$BOOST_ROOT"; ./b2 threading=multi --prefix="$BOOST_ROOT" -d0 install
-  - cd ..;
+  - cd "$SRC_DIR";
 script:
   - cmake .
   - cmake --build .

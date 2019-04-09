@@ -6,7 +6,7 @@ else()
     set(VERSION_BUILD 0)
 endif()
 
-project(hcch VERSION 0.2.${VERSION_BUILD})
+project(hcch VERSION 0.3.${VERSION_BUILD})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} )
 set(Boost_USE_STATIC_LIBS ON)
