@@ -9,7 +9,7 @@ endif()
 project(hcch VERSION 0.1.${VERSION_BUILD})
 
 
-set(BOOST_ROOT /usr/include/boost)
+#set(BOOST_ROOT /usr/include/boost)
 
 # For my linux
 #set(BOOST_LIBRARYDIR /usr/local/lib)
