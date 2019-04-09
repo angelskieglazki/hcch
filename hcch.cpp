@@ -6,6 +6,7 @@
 #include <iostream>
 using namespace std;
 
+#include "version.h"
 #include "SourcesCreator.h"
 
 //#include <boost/program_options.hpp>
@@ -34,6 +35,7 @@ void option_dependency(const variables_map& vm,
 
 int main(int argc, char* argv[])
 {
+  std::cout<<"v"<<PROJECT_VERSION_MAJOR<<"."<<PROJECT_VERSION_MINOR<<"."<<PROJECT_VERSION_PATCH<<std::endl;
   try {
 
     options_description desc("Allowed options");

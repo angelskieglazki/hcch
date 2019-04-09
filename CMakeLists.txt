@@ -6,7 +6,7 @@ else()
     set(VERSION_BUILD 0)
 endif()
 
-project(hcch VERSION 0.1.${VERSION_BUILD})
+project(hcch VERSION 0.2.${VERSION_BUILD})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} )
 set(Boost_USE_STATIC_LIBS ON)
@@ -19,11 +19,11 @@ find_package(LLVM REQUIRED CONFIG)
 include_directories (${Boost_INCLUDE_DIRS})
 link_directories (${Boost_LIBRARY_DIRS})
 
-configure_file (
-        "${PROJECT_SOURCE_DIR}/version.h.in"
-        "${PROJECT_BINARY_DIR}/version.h"
-)
-
+#configure_file (
+#        "${PROJECT_SOURCE_DIR}/version.h.in"
+#        "${PROJECT_BINARY_DIR}/version.h"
+#)
+configure_file(version.h.in version.h)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(hcch hcch.cpp SourcesCreator.cpp SourcesCreator.h)
