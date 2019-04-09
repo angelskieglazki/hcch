@@ -15,13 +15,16 @@ set(BOOST_ROOT /usr/include/boost/)
 #set(BOOST_LIBRARYDIR /usr/local/lib)
 
 # For travis-ci host
-set(BOOST_LIBRARYDIR /usr/lib/x86_64-linux-gnu)
+#set(BOOST_LIBRARYDIR /usr/lib/x86_64-linux-gnu)
 
 set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_STATIC_RUNTIME ON)
+
 include_directories (${Boost_INCLUDE_DIRS})
 link_directories (${Boost_LIBRARY_DIRS})
 
-find_package(Boost 1.67)
+set(Boost_DEBUG 1)
+find_package(Boost 1.67 COMPONENTS program_options REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
 
 configure_file (
@@ -39,7 +42,7 @@ set_target_properties(hcch PROPERTIES
         COMPILE_OPTIONS -Wpedantic -Wall -Wextra
         )
 
-TARGET_LINK_LIBRARIES( hcch ${BOOST_LIBRARYDIR}/libboost_program_options.a )# ${Boost_LIBRARIES} )
+TARGET_LINK_LIBRARIES( hcch  ${Boost_LIBRARIES} )#${BOOST_LIBRARYDIR}/libboost_program_options.a )
 
 
 install(TARGETS hcch RUNTIME DESTINATION bin)
