@@ -47,6 +47,8 @@ before_script:
 #  - sudo ./bootstrap.sh --with-libraries=program_options --prefix=/usr/local
 #  - sudo ./b2 link=shared threading=multi variant=release
 #  - sudo ./b2 install > build.log 2>&1
+  - env
+  - export SRC_DIR="`pwd`"
   - wget https://cmake.org/files/v3.13/cmake-3.13.4-Linux-x86_64.sh
   - sudo sh cmake-3.13.4-Linux-x86_64.sh -- --skip-license --prefix=/usr
   - export DOWNLOAD_ROOT="$HOME/download"; if [ ! -d "$DOWNLOAD_ROOT" ]; then mkdir -p "$DOWNLOAD_ROOT"; fi
@@ -57,7 +59,7 @@ before_script:
   - if [ ! -d "$BOOST_ROOT" ]; then mkdir -p "$BOOST_ROOT" && tar xzf "$DOWNLOAD_ROOT/boost.tar.gz" --strip-components=1 -C "$BOOST_ROOT"; fi
   - if [ ! -f "$BOOST_ROOT/b2" ]; then cd "$BOOST_ROOT"; ./bootstrap.sh --with-libraries=program_options,system,thread,regex; fi
   - cd "$BOOST_ROOT"; ./b2 threading=multi --prefix="$BOOST_ROOT" -d0 install
-  - cd ..;
+  - cd "$SRC_DIR";
 script:
   - cmake .
   - cmake --build .
