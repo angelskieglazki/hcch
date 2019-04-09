@@ -8,24 +8,16 @@ endif()
 
 project(hcch VERSION 0.1.${VERSION_BUILD})
 
-
-#set(BOOST_ROOT /usr/include/boost)
-
-# For my linux
-#set(BOOST_LIBRARYDIR /usr/local/lib)
-
-# For travis-ci host
-#set(BOOST_LIBRARYDIR /usr/lib/x86_64-linux-gnu)
-
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} )
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_STATIC_RUNTIME ON)
 
-include_directories (${Boost_INCLUDE_DIRS})
-link_directories (${Boost_LIBRARY_DIRS})
-
 set(Boost_DEBUG 1)
+
 find_package(Boost 1.67 COMPONENTS program_options REQUIRED)
 find_package(LLVM REQUIRED CONFIG)
+include_directories (${Boost_INCLUDE_DIRS})
+link_directories (${Boost_LIBRARY_DIRS})
 
 configure_file (
         "${PROJECT_SOURCE_DIR}/version.h.in"
@@ -42,7 +34,7 @@ set_target_properties(hcch PROPERTIES
         COMPILE_OPTIONS -Wpedantic -Wall -Wextra
         )
 
-TARGET_LINK_LIBRARIES( hcch  ${Boost_LIBRARIES} )#${BOOST_LIBRARYDIR}/libboost_program_options.a )
+TARGET_LINK_LIBRARIES( hcch  ${Boost_LIBRARIES} )
 
 
 install(TARGETS hcch RUNTIME DESTINATION bin)
