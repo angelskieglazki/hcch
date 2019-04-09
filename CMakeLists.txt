@@ -12,10 +12,10 @@ project(hcch VERSION 0.1.${VERSION_BUILD})
 set(BOOST_ROOT /usr/include/boost/)
 
 # For my linux
-set(BOOST_LIBRARYDIR /usr/local/lib)
+#set(BOOST_LIBRARYDIR /usr/local/lib)
 
 # For travis-ci host
-#set(BOOST_LIBRARYDIR /usr/lib/x86_64-linux-gnu)
+set(BOOST_LIBRARYDIR /usr/lib/x86_64-linux-gnu)
 
 set(Boost_USE_STATIC_LIBS ON)
 include_directories (${Boost_INCLUDE_DIRS})
