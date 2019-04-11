@@ -6,7 +6,7 @@ else()
     set(VERSION_BUILD 0)
 endif()
 
-project(hcch VERSION 0.3.${VERSION_BUILD})
+project(hcch VERSION 0.4.${VERSION_BUILD})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} )
 set(Boost_USE_STATIC_LIBS ON)
@@ -26,7 +26,7 @@ link_directories (${Boost_LIBRARY_DIRS})
 configure_file(version.h.in version.h)
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(hcch hcch.cpp SourcesCreator.cpp SourcesCreator.h)
+add_executable(hcch hcch.cpp SourcesCreator.cpp SourcesCreator.h helpers.h helpers.c)
 
 set_target_properties(hcch PROPERTIES
         CXX_STANDARD 14

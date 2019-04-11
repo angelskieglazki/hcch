@@ -9,10 +9,17 @@ using namespace std;
 #include "version.h"
 #include "SourcesCreator.h"
 
-//#include <boost/program_options.hpp>
 #include <boost/program_options.hpp>
 using namespace boost::program_options;
 
+void print_version()
+{
+  std::cout<<"Utility for creating c/c++ header-source pair v"
+    <<PROJECT_VERSION_MAJOR<<"."
+    <<PROJECT_VERSION_MINOR<<"."
+    <<PROJECT_VERSION_PATCH
+    <<std::endl;
+}
 
 void conflicting_options(const variables_map& vm,
                          const char* opt1, const char* opt2)
@@ -35,7 +42,7 @@ void option_dependency(const variables_map& vm,
 
 int main(int argc, char* argv[])
 {
-  std::cout<<"v"<<PROJECT_VERSION_MAJOR<<"."<<PROJECT_VERSION_MINOR<<"."<<PROJECT_VERSION_PATCH<<std::endl;
+
   try {
 
     options_description desc("Allowed options");
@@ -50,17 +57,27 @@ int main(int argc, char* argv[])
     variables_map vm;
     store(parse_command_line(argc, argv, desc), vm);
 
+    if (vm.count("version")) {
+      print_version();
+      return 0;
+    }
+
     if (vm.count("help")) {
+      print_version();
       cout << desc << "\n";
       return 0;
     }
 
     conflicting_options(vm, "c_sources", "cpp_sources");
+    conflicting_options(vm, "version", "c_sources");
+    conflicting_options(vm, "version", "cpp_sources");
     option_dependency(vm, "c_sources", "name");
     option_dependency(vm, "cpp_sources", "name");
 
     if (!vm["cpp_sources"].as<bool>() && !vm["c_sources"].as<bool>()) {
-      throw logic_error(string("Source type missed!"));
+      cout << "Source type missed!" << "\n";
+      cout << desc << "\n";
+      return 0;
     }
 
     SourcesCreator::Builder b;
