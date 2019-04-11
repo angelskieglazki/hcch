@@ -27,13 +27,33 @@ extern "C" {
 
 class MessageBuilder
 {
+
+  static void addToStream(std::ostringstream&)
+  {
+  }
+
+  template<typename T, typename... Args>
+  static void addToStream(std::ostringstream& a_stream, T&& a_value, Args&&... a_args)
+  {
+    // \TODO: change to stream.write
+    a_stream << std::forward<T>(a_value);
+    addToStream(a_stream, std::forward<Args>(a_args)...);
+  }
  public:
-  template <typename... Args>
-  static std::string createMessage(Args&& ...args) {
+  template<typename... Args>
+  static inline std::string createMessage(Args&&... a_args)
+  {
     std::ostringstream s;
-    (s << ... << args);
+    addToStream(s, std::forward<Args>(a_args)...);
     return s.str();
   }
+
+//  template <typename... Args>
+//  static std::string createMessage(Args&& ...args) {
+//    std::ostringstream s;
+//    (s << ... << args);
+//    return s.str();
+//  }
 };
 
 
