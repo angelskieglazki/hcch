@@ -1,5 +1,5 @@
 language: cpp
-dist: xenial
+dist: bionic
 sudo: false
 os: linux
 
@@ -23,7 +23,7 @@ matrix:
           update: true
           sources:
 #            - sourceline: 'ppa:mhier/libboost-latest'
-            - ubuntu-toolchain-r-test
+#            - ubuntu-toolchain-r-test
           packages:
             - g++-8
 #            - boost1.67
@@ -34,7 +34,7 @@ matrix:
           update: true
           sources:
 #            - sourceline: 'ppa:mhier/libboost-latest'
-            - ubuntu-toolchain-r-test
+#           - ubuntu-toolchain-r-test
           packages:
             - g++-8
 #            - boost1.67
