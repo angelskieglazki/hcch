@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <sstream>
 
 extern "C" {
 #include "helpers.h"
@@ -21,7 +22,6 @@ extern "C" {
 #define AUTHOR_S "\\author "
 #define DATE_S "Created on "
 
-#include <sstream>
 
 
 

@@ -4,13 +4,13 @@
 //#define _GLIBCXX_USE_CXX11_ABI 0
 
 #include <iostream>
-using namespace std;
 
 #include "version.h"
 #include "SourcesCreator.h"
 
 #include <boost/program_options.hpp>
 using namespace boost::program_options;
+using namespace std;
 
 void print_version()
 {
