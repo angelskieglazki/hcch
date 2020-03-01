@@ -126,6 +126,11 @@ class SourcesCreator {
   std::string license;
 };
 
+struct SourceBuildData {
+  std::string name = "DefaultName";
+  source_type type = source_type::c;
+  int license_idx = 0;
+};
 class SourcesCreator::Builder {
   private:
     enum LicenseType {
@@ -149,6 +154,14 @@ class SourcesCreator::Builder {
     Builder& setName(const std::string& n) { this->name = n; return *this; }
     Builder& setType(const source_type t) { this->type = t; return *this; }
     Builder& setLicense(int index) { this->license = license_arr[index]; return *this; }
+    Builder& setAllData(const SourceBuildData& sbd)
+    {
+      this->name = sbd.name;
+      this->type = sbd.type;
+      this->license = license_arr[sbd.license_idx];
+      return *this;
+    }
+
     SourcesCreator build() {
       return SourcesCreator(name, type, license);
     }
