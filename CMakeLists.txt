@@ -15,7 +15,7 @@ set(Boost_USE_STATIC_RUNTIME ON)
 set(Boost_DEBUG 1)
 
 find_package(Boost 1.67 COMPONENTS program_options REQUIRED)
-find_package(LLVM REQUIRED CONFIG)
+#find_package(LLVM REQUIRED CONFIG)
 include_directories (${Boost_INCLUDE_DIRS})
 link_directories (${Boost_LIBRARY_DIRS})
 

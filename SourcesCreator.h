@@ -91,7 +91,8 @@ class SourcesCreator {
   }
 
  private:
-  SourcesCreator(const std::string& n, source_type t) : name(n), type(t) {}
+  SourcesCreator(const std::string& n, source_type t, std::string& l)
+    : name(n), type(t), license(l) {}
 
   void create_files(const std::string& p) {
     std::ofstream source_file (name + p);
@@ -108,6 +109,8 @@ class SourcesCreator {
                                                     END_LINE_STAR, FILE_S, name + p,
                                                     END_LINE_STAR, AUTHOR_S, get_user_name(),
                                                     END_LINE_STAR, DATE_S, get_time(),
+                                                    END_LINE_STAR, license, 
+                                                    END_LINE_STAR, END_LINE,
                                                     "*/", END_LINE,
                                                     END_LINE, "#ifndef ", str_toupper(name), "_H",
                                                     END_LINE, "#define ", str_toupper(name), "_H",
@@ -120,22 +123,33 @@ class SourcesCreator {
  private:
   std::string name;
   source_type type;
+  std::string license;
 };
 
 class SourcesCreator::Builder {
- private:
-  std::string name;
-  source_type type;
+  private:
+    enum LicenseType {
+      kEmpty_License,
+      kGPL_License,
+      kBSD_License,
+      kApache_Licene,
+      kLicenseNum
+    };
 
-  static constexpr source_type default_type = source_type::c;
+  
+    std::string name;
+    source_type type;
+    std::string license;
 
- public:
-  Builder() : name("DefaultName"), type(default_type) {}
+    static constexpr source_type default_type = source_type::c;
+    static const std::array<std::string, kLicenseNum> license_arr;
+   public:
+    Builder() : name("DefaultName"), type(default_type), license(license_arr[0]) {}
 
-  Builder& setName(const std::string& n) { this->name = n; return *this; }
-  Builder& setType(const source_type t) { this->type = t; return *this; }
-
-  SourcesCreator build() {
-    return SourcesCreator(name, type);
-  }
+    Builder& setName(const std::string& n) { this->name = n; return *this; }
+    Builder& setType(const source_type t) { this->type = t; return *this; }
+    Builder& setLicense(int index) { this->license = license_arr[index]; return *this; }
+    SourcesCreator build() {
+      return SourcesCreator(name, type, license);
+    }
 };
