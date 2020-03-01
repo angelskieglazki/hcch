@@ -48,6 +48,7 @@ int main(int argc, char* argv[])
     options_description desc("Allowed options");
     desc.add_options()
         ("help,h", "print usage message")
+        ("interactive,i", "create sources in interactive mode")
         ("name,n", value<string>(), "source name")
         ("c_sources", bool_switch(), "*.h/*.c pair for c")
         ("cpp_sources", bool_switch(), "*.h/*.cpp pair for c++")
@@ -56,6 +57,40 @@ int main(int argc, char* argv[])
 
     variables_map vm;
     store(parse_command_line(argc, argv, desc), vm);
+
+    if (vm.count("interactive")) {
+      printf("Sosi zheppy\n");
+      SourceBuildData data;
+
+      std::string input;
+      cout << "Choose source name(DefaultName by default) : ";
+      getline(cin,input);
+      if (input.length() > 0) {
+        data.name = input;
+      }
+      
+      cout << "Choose source type(\"C\" - 0, \"C++\" - 1, C by default) : ";
+      int type = 0;
+      getline(cin,input);
+      if (input.length() > 0) {
+        stringstream(input)>>type;
+      }
+      data.type = static_cast<source_type>(type);
+
+      cout << "Choose license (\"GPL\" - 1, \"BSD\" - 2, \"Apache\" - 3,  Empty by default) : ";
+      getline(cin,input);
+      if (input.length() > 0) {
+        stringstream(input)>>data.license_idx;
+      }
+
+      
+      SourcesCreator::Builder b;
+      b.setAllData(data);
+      auto sc = b.build();
+      sc.create_source();
+
+      return 0;
+    }
 
     if (vm.count("version")) {
       print_version();
@@ -82,9 +117,9 @@ int main(int argc, char* argv[])
 
     SourcesCreator::Builder b;
     if (vm["cpp_sources"].as<bool>()) {
-      b.setName(vm["name"].as<string>()).setType(source_type::cpp).build();
+      b.setName(vm["name"].as<string>()).setType(source_type::cpp);
     } else if (vm["c_sources"].as<bool>()) {
-      b.setName(vm["name"].as<string>()).setType(source_type::c).build();
+      b.setName(vm["name"].as<string>()).setType(source_type::c);
     }
 
     auto sc = b.build();
