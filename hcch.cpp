@@ -59,7 +59,6 @@ int main(int argc, char* argv[])
     store(parse_command_line(argc, argv, desc), vm);
 
     if (vm.count("interactive")) {
-      printf("Sosi zheppy\n");
       SourceBuildData data;
 
       std::string input;
@@ -68,7 +67,7 @@ int main(int argc, char* argv[])
       if (input.length() > 0) {
         data.name = input;
       }
-      
+
       cout << "Choose source type(\"C\" - 0, \"C++\" - 1, C by default) : ";
       int type = 0;
       getline(cin,input);
@@ -83,7 +82,6 @@ int main(int argc, char* argv[])
         stringstream(input)>>data.license_idx;
       }
 
-      
       SourcesCreator::Builder b;
       b.setAllData(data);
       auto sc = b.build();
