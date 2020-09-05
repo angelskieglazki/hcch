@@ -48,12 +48,6 @@ class MessageBuilder
     return s.str();
   }
 
-//  template <typename... Args>
-//  static std::string createMessage(Args&& ...args) {
-//    std::ostringstream s;
-//    (s << ... << args);
-//    return s.str();
-//  }
 };
 
 
@@ -106,7 +100,7 @@ class SourcesCreator {
 
     std::ofstream header_file (name + ".h");
     auto header_str = MessageBuilder::createMessage("/**",
-                                                    END_LINE_STAR, FILE_S, name + p,
+                                                    END_LINE_STAR, FILE_S, name, ".h",
                                                     END_LINE_STAR, AUTHOR_S, get_user_name(),
                                                     END_LINE_STAR, DATE_S, get_time(),
                                                     END_LINE_STAR, license, 
