@@ -6,7 +6,7 @@ os: linux
 env:
   global:
     - PROJECT_VERSION_MAJOR="0"
-    - PROJECT_VERSION_MINOR="10"
+    - PROJECT_VERSION_MINOR="11"
     - PROJECT_VERSION_PATCH="${TRAVIS_BUILD_NUMBER}"
     - PROJECT_VERSION="${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}"
 branches:
@@ -69,6 +69,6 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-    - curl -T hcch-$PROJECT_VERSION-Linux.deb -uangelskieglazki:$BINTRAY_API_KEY "https://api.bintray.com/content/angelskieglazki/aeco/hcch/$TRAVIS_BUILD_NUMBER/hcch-$PROJECT_VERSION-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+    - curl -u$JFROGUSERNAME:$JFROGPASSWORD -XPUT "https://aeco.jfrog.io/artifactory/hcch/pool/hcch-$PROJECT_VERSION-Linux.deb;deb.distribution=focal;deb.component=release;deb.architecture=amd64" -T hcch-$PROJECT_VERSION-Linux.deb
   on:
     tags: true
